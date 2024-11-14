@@ -1,6 +1,8 @@
 import requests
 import pandas as pd
 
+#comme l'API ne nous permet pas de récupérer les animes en groupe à travers leur ID, on fait le faire par le rang décroissant (en prenant les 100 1ers rangs, ainsi de suite...)
+
 all_anime = []  # List to store all anime data
 nbr_needed = 27490  # Total number of anime on MAL as of 13/11/2024 (obtained by looking directly on the site of myanimelist)
 
