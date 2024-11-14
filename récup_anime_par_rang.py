@@ -42,3 +42,4 @@ while k < nbr_needed:
 dataf = pd.DataFrame(all_anime) #final data put in dataframe
 print(dataf.head(2))
 
+dataf.to_csv(r'C:\Utilisateurs\fjenf\Téléchargements\myanimelist_complete_dataset.csv', index=False)
