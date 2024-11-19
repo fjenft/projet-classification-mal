@@ -36,7 +36,7 @@ while k < nbr_needed:
             print("the total number of anime collected is " + str(len(all_anime)))
             break
     else :
-        print("cannot retrive more than " + str(len(all_anime))) 
+        print("cannot retrieve more than " + str(len(all_anime))) 
         break
 
 dataf = pd.DataFrame(all_anime) #final data put in dataframe
