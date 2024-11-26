@@ -11,7 +11,7 @@ url = 'https://api.myanimelist.net/v2/anime/ranking'
 parameters = {
     'ranking_type': 'all',  # Retrieve anime across all rankings
     'limit': 100,  # Max limit per request, divides the total number of anime on mal
-    'fields': 'id,title,mean,type,start_date,end_date,rank,popularity,num_list_users,num_scoring_users,nsfw,media_type,status,num_episodes,start_season,broadcast,source,average_episode_duration,rating'
+    'fields': 'id,title,mean,start_date,end_date,rank,popularity,num_list_users,num_scoring_users,nsfw,media_type,status,num_episodes,start_season,broadcast,source,average_episode_duration,rating'
 }
 
 k = 0  # offset but also the number of times the loop is used that is 27490/127 here
@@ -39,7 +39,7 @@ while k < nbr_needed:
         print("cannot retrieve more than " + str(len(all_anime))) 
         break
 
-dataf = pd.DataFrame(all_anime) #final data put in dataframe
-print(dataf.head(2))
+anime_data = pd.DataFrame(all_anime) #final data put in dataframe
+print(anime_data.head(2))
 
-dataf.to_csv(r'C:\Utilisateurs\fjenf\Téléchargements\myanimelist_complete_dataset.csv', index=False)
+anime_data.to_csv(r'C:\Utilisateurs\fjenf\Téléchargements\myanimelist_dataset_non_nettoyé.csv', index=False)
