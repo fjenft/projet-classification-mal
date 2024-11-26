@@ -1,4 +1,5 @@
 import pandas as pd
+import ast
 
 # On charge le fichier csv créé dans le fichier de récupération des données sur les animes dans un DataFrame
 anime_data = pd.read_csv(r'C:\Utilisateurs\fjenf\Téléchargements\myanimelist_dataset_non_nettoyé.csv')
@@ -6,33 +7,24 @@ anime_data = pd.read_csv(r'C:\Utilisateurs\fjenf\Téléchargements\myanimelist_d
 print(anime_data.head())
 print(anime_data.info())
 
-import requests
+#On voit que toutes les caractéristiques de chaque anime est contenu dans un "node", un dictionnaire, sauf le rang. 
+#Il faut donc extraire chaque élément du dictionnaire node pour en faire des colonnes à part entière
 
-#on voit que toutes les caractéristiques de chaque anime est contenu dans un "node", un dictionnaire, sauf le rang. 
-#Il faut donc extraire chaque élément du dictionnaire node pour un faire une colonne à part entière
+# On extrait toutes les clés du dictionnaire 'node' et on les transforme en colonnes du dataframe
+anime_data['node'] = anime_data['node'].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)    
+keys = set().union(*(d.keys() for d in anime_data['node'] if isinstance(d, dict)))
+for y in keys:
+    anime_data[f'{y}'] = anime_data['node'].apply(lambda x: x.get(y) if isinstance(x, dict) else None)
 
-# Vérifier si 'node' est une colonne dans le DataFrame
-if 'node' in anime_data.columns:
-    # Fonction pour extraire toutes les clés d'un dictionnaire
-    def extract_node_info(node):
-        try:
-            # Convertir la chaîne de caractères en dictionnaire
-            node_dict = eval(node) if isinstance(node, str) else node
-            # Retourner les éléments du dictionnaire sous forme de liste de tuples (clé, valeur)
-            return node_dict
-        except:
-            return {}
+# On convertit les colonnes contenant des dictionnaires en chaînes
+for column in anime_data.columns:
+    if anime_data[column].map(type).eq(dict).any():
+        anime_data[column] = anime_data[column].apply(lambda x: str(x) if isinstance(x, dict) else x)
 
-    # Appliquer la fonction à chaque ligne de la colonne 'node'
-    node_data = anime_data['node'].apply(extract_node_info)
-
-    # Créer de nouvelles colonnes à partir des clés du dictionnaire 'node'
-    for i, col in enumerate(node_data):
-        for key in col.keys():
-            anime_data[f'node_{key}'] = node_data.apply(lambda x: x.get(key) if isinstance(x, dict) else None)
-
-# Vérifier les premières lignes pour voir les nouvelles colonnes
 print(anime_data.head())
+
+#On supprime la colonne node qui n'apporte plus d'info
+anime_data = anime_data.drop(columns=['node'])
 
 #On vérifie s'il y a des doublons
 nbr_doublons = anime_data.duplicated().sum()
