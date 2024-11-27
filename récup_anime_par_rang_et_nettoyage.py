@@ -94,23 +94,7 @@ anime_data = anime_data.dropna(subset=['start_year'])
 nbr_nan = anime_data.isna().sum().sum()
 print(f"Il reste {nbr_nan} NaN")
 
-
-import s3fs
-from io import StringIO
-import os
-
-print("AWS Access Key ID: ", os.environ.get('AWS_ACCESS_KEY_ID'))
-print("AWS Secret Access Key: ", os.environ.get('AWS_SECRET_ACCESS_KEY'))
-
-# Configuration du système de fichiers S3
-fs = s3fs.S3FileSystem(anon=False)
-# Définir le chemin cible dans le stockage S3
-chemin_s3 = 's3://your-ssp-cloud-bucket/fjenft/anime_data_nettoyé.csv'
-# Créer un buffer en mémoire pour stocker votre CSV
-csv_buffer = StringIO()
-# Convertir votre DataFrame en CSV et l'écrire dans le buffer en mémoire
-anime_data.to_csv(csv_buffer, index=False)
-# Rewind the buffer before uploading
-csv_buffer.seek(0)
-# Télécharger le CSV depuis le buffer vers S3
-fs.put(csv_buffer, chemin_s3)
+# Sauvegarder le DataFrame en fichier CSV local
+local_file_path = "anime_data.csv"
+anime_data.to_csv(local_file_path, index=False)
+print(f"Fichier CSV sauvegardé localement : {local_file_path}")
