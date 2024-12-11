@@ -7,10 +7,27 @@ import time
 import pandas as pd
 
 starting_time = time.time()
+# Classement des différents types de popularités en 4 types distincts :
+
+
+def categorize_popularity(popularity):
+    if popularity < 50:
+        return 3  # Très populaire
+    elif 50 <= popularity < 200:
+        return 2  # Populaire
+    elif 200 <= popularity < 500:
+        return 1  # Moyen
+    elif 500 <= popularity < 1000:
+        return 0  # Nul
+    return -1  # Si aucune catégorie ne correspond (valeurs > 1000 ou autres cas)
+
+# Création de la nouvelle colonne categorize_popularity 
+df['popularity_category'] = df['popularity'].apply(categorize_popularity)
+
+
 # Préparation des exemples et des étiquettes
-df['popularity'] = LabelEncoder().fit_transform(df['popularity'])
-X = df.drop(columns=['popularity'])  # autres caractéristiques que popularité ('variables indépendantes')
-y = df['popularity']    # variable dépendante
+X = df.drop(columns=['popularity', 'popularity_category'])  # Autres caractéristiques, sans 'popularity'
+y = df['popularity_category']  # Variable dépendante (nouvelle catégorisation)
 
 # Séparation des données en test/train
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.2, random_state=42)
