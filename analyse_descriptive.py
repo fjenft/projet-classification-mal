@@ -10,4 +10,4 @@ print(anime_data['mean'].describe())
 anime_data_for_score=anime_data[anime_data['mean'] !=0]
 print(anime_data_for_score['mean'].describe())
 
-print(anime_data.corr())
+

@@ -79,9 +79,12 @@ for i in anime_data.columns:
     k = anime_data[i].isna().sum()
     print(f"Le nombre de NaN dans la colonne '{i}' est : {k}")
 
+#on gère les différents types de NaN
+
 anime_data['source'] = anime_data['source'].fillna('source_inconnue')
 anime_data['rating'] = anime_data['source'].fillna('rating_inconnu')
 anime_data['mean'] = anime_data['mean'].fillna(0)
+anime_data = anime_data.dropna(subset=['rank'])
 
 #On veut uniquement garder l'année dans la colonne start_date
 anime_data['start_date'] = pd.to_datetime(anime_data['start_date'], errors='coerce')  
@@ -93,6 +96,11 @@ anime_data = anime_data.dropna(subset=['start_year'])
 #On vérifie qu'il n'y a plus de NaN
 nbr_nan = anime_data.isna().sum().sum()
 print(f"Il reste {nbr_nan} NaN")
+
+#On ne garde que les colonnes numériques pour calculer la matrice de correlation
+anime_data_num = anime_data.select_dtypes(include=["number"])
+# Calcul de la matrice de corrélation
+print(anime_data_num.corr())
 
 # Sauvegarder le DataFrame en fichier CSV local
 local_file_path = "anime_data.csv"
