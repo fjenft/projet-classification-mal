@@ -5,6 +5,22 @@ import seaborn as sns
 csv_file_path = '/home/onyxia/work/anime_data.csv' #make sure the path is correct!
 df = pd.read_csv(csv_file_path)
 
+#printing first lines of the data
+print(df.head())
+
+#some statistics 
+print(df.describe())
+
+#type of each variable
+print(df.dtypes)
+
+#distributions of numerical variables
+df.hist(bins=20, figsize=(15, 10), color='skyblue', edgecolor='black')
+plt.suptitle("Distributions of Numerical Variables")
+plt.show()
+plt.savefig('/home/onyxia/work/distributions.png')
+
+
 # Correlation heatmap
 numerical_features = ['num_list_users', 'num_episodes', 'mean', 'rank', 'popularity', 'num_scoring_users', 'start_year']
 plt.figure(figsize=(12, 8))
