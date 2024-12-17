@@ -71,7 +71,7 @@ plt.close()
 anime_data_for_score['Groupe'] = (anime_data_for_score['rank'] - 1) // 100 + 1 #on créé les groupes de 100 animés
 anime_1000 = anime_data_for_score[anime_data_for_score['Groupe'] <= 10] #on ne garde que les 10 premiers groupes
 
-grouped_means = anime_top_1000.groupby('Groupe')['mean'].mean().reset_index()
+grouped_means = anime_1000.groupby('Groupe')['mean'].mean().reset_index()
 grouped_means['Groupe'] = grouped_means['Groupe'].astype(str)  # Conversion pour le graphique
 
 plt.figure(figsize=(12, 6))
