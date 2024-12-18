@@ -3,10 +3,13 @@ import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, accuracy_score, roc_auc_score
 from sklearn.preprocessing import LabelEncoder  # On convertit les labels en nombres entiers
+from sklearn.linear_model import LogisticRegression
 import time
 import pandas as pd
 
-starting_time = time.time()
+
+
+starting_time=time.time()
 # Classement des différents types de popularités en 4 types distincts :
 
 
@@ -46,21 +49,19 @@ print("Trainning time:", training_time)
 
 
 # Modèle XGBoost et entrainement du modèle
-model = xgb.XGBClassifier(
+model_lr = LogisticRegression(
     objective='multi:softmax',  #classification mutliclasses
     num_class=len(y.unique()),
-    use_label_encoder=False,
-    eval_metric='mlogloss'  #perte log
+    solver='lbfgs',
+    max_iter=500
 )
 
-model.fit(X_train, y_train)
+model_lr.fit(X_train, y_train)
 
-y_pred = model.predict(X_test)
+y_pred = model_lr.predict(X_test)
 print(classification_report(y_test, y_train))
 
 # AUC Test
-y_pred_proba = model.predict_proba(X_test)  # Prédictions sous forme de probabilités
+y_pred_proba = model_lr.predict_proba(X_test)  # Prédictions sous forme de probabilités
 auc_test = roc_auc_score(y_true=y_test, y_score=y_pred_proba, multi_class='ovr')
 print("auc_test_xgb", auc_test)
-
-# # Modèle de classification binaire - transformers et NLP
