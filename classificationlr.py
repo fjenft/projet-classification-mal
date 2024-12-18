@@ -48,10 +48,9 @@ training_time = time.time()-starting_time
 print("Trainning time:", training_time)
 
 
-# Modèle XGBoost et entrainement du modèle
+# Modèle régression logistique et entrainement du modèle
 model_lr = LogisticRegression(
-    objective='multi:softmax',  #classification mutliclasses
-    num_class=len(y.unique()),
+    multi_class='multinomial',  #classification mutliclasses
     solver='lbfgs',
     max_iter=500
 )
@@ -65,3 +64,4 @@ print(classification_report(y_test, y_train))
 y_pred_proba = model_lr.predict_proba(X_test)  # Prédictions sous forme de probabilités
 auc_test = roc_auc_score(y_true=y_test, y_score=y_pred_proba, multi_class='ovr')
 print("auc_test_xgb", auc_test)
+
