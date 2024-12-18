@@ -41,6 +41,8 @@ y_test_classes = y_test.unique()
 # Si des classes sont absentes, on peut en ajouter une ligne pour traiter cela
 if len(set(y_train_classes) - set(y_test_classes)) > 0:
     y_test = pd.concat([y_test, pd.Series([y_train_classes[0]] * (len(y_train_classes) - len(y_test_classes)), index=y_test.index)])
+    
+y_test=y_test.reset_index(drop=True)
 
 # Training time
 training_time = time.time()-starting_time

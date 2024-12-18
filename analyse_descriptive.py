@@ -33,7 +33,7 @@ plt.ylabel("Nbr d'animés")
 plt.savefig("Nbr_animés_par_annee.png")
 plt.close()
 
-# 3. Distribution des sources des animes
+#On veut représenter l
 plt.figure(figsize=(10, 6))
 source_counts = anime_data_for_score['source'].value_counts()
 sns.barplot(x=source_counts.index, y=source_counts.values, palette='coolwarm', hue=source_counts.index, legend=False)
