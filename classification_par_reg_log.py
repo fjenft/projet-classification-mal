@@ -3,16 +3,15 @@ import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, accuracy_score, roc_auc_score
 from sklearn.preprocessing import LabelEncoder  # On convertit les labels en nombres entiers
+from sklearn.linear_model import LogisticRegression
 import time
 import pandas as pd
 
 anime_data=pd.read_csv("anime_data.csv")
-
 anime_data=anime_data.drop(columns=["ranking", "rating", "title", "source", "media_type", "status", "nsfw"])
 
-starting_time = time.time()
+starting_time=time.time()
 # Classement des différents types de popularités en 4 types distincts :
-
 
 def categorize_popularity(popularity):
     if popularity < 50:
@@ -23,11 +22,10 @@ def categorize_popularity(popularity):
         return 1  # Moyen
     elif 500 <= popularity < 1000:
         return 0  # Nul
-    return 0  # Si aucune catégorie ne correspond (valeurs > 1000 ou autres cas)
+    return -1  # Si aucune catégorie ne correspond (valeurs > 1000 ou autres cas)
 
 # Création de la nouvelle colonne categorize_popularity 
 anime_data['popularity_category'] = anime_data['popularity'].apply(categorize_popularity)
-
 
 # Préparation des exemples et des étiquettes
 X = anime_data.drop(columns=['popularity', 'popularity_category'])  # Autres caractéristiques, sans 'popularity'
@@ -48,23 +46,19 @@ if len(set(y_train_classes) - set(y_test_classes)) > 0:
 training_time = time.time()-starting_time
 print("Trainning time:", training_time)
 
-
 # Modèle XGBoost et entrainement du modèle
-model = xgb.XGBClassifier(
-    objective='multi:softmax',  #classification mutliclasses
-    num_class=len(y.unique()),
-    use_label_encoder=False,
-    eval_metric='mlogloss'  #perte log
+model_lr = LogisticRegression(
+    multi_class='multinomial',  #classification mutliclasses
+    solver='lbfgs',
+    max_iter=500
 )
 
-model.fit(X_train, y_train)
+model_lr.fit(X_train, y_train)
 
-y_pred = model.predict(X_test)
+y_pred = model_lr.predict(X_test)
 print(classification_report(y_test, y_train))
 
 # AUC Test
-y_pred_proba = model.predict_proba(X_test)  # Prédictions sous forme de probabilités
+y_pred_proba = model_lr.predict_proba(X_test)  # Prédictions sous forme de probabilités
 auc_test = roc_auc_score(y_true=y_test, y_score=y_pred_proba, multi_class='ovr')
 print("auc_test_xgb", auc_test)
-
-# Modèle de classification binaire - transformers et NLP

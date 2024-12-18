@@ -1,37 +1,36 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 anime_data=pd.read_csv("anime_data.csv")
 
 print(anime_data['mean'].describe())
 
-#Comme une moyenne du score des utilisateurs pour un anime donné était mise à 0 quand elle était inconnue (NaN), on va supprimer les animes dont la moyenne est 0.
-#De manière intuitive, il est normal de supprimer ces animes car une moyenne de scores par les utilisateurs de 0 est quasi impossible
+#Comme une note moyenne des utilisateurs pour un anime donné était mise à 0 quand elle était inconnue (NaN), on va supprimer les animes dont la note moyenne est 0.
+#De manière intuitive, il est normal de supprimer ces animes car une note moyenne par les utilisateurs de 0 est quasi impossible
 
 anime_data_for_score=anime_data[anime_data['mean'] !=0]
 print(anime_data_for_score['mean'].describe())
 
 anime_data['start_year'].value_counts().sort_index()
 
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-# 1. Distribution des scores moyens des animes
+# On veut faire un histogramme qui représente le nombre d'animes par note moyenne
 plt.figure(figsize=(10, 6))
 sns.histplot(anime_data_for_score['mean'], bins=30, kde=True, color='blue')
-plt.title("Distribution des scores moyens des animes")
-plt.xlabel("Score moyen")
+plt.title("Distribution des animes en fonction de leurs notes moyennes")
+plt.xlabel("Note moyenne")
 plt.ylabel("Nbr d'animes")
 plt.savefig("distribution_scores.png")
 plt.close()
 
-# 2. Nombre d'animes produits par année
+#On veut voir l'évolution du nombre d'animes produits par année
 plt.figure(figsize=(12, 6))
 sns.countplot(x='start_year', data=anime_data_for_score, palette='viridis', hue='start_year', legend=False)
 plt.xticks(rotation=90)
 plt.title("Nombre d'animes produits par année")
 plt.xlabel("Année de sortie")
-plt.ylabel("Nombre d'animes")
-plt.savefig("animes_par_annee.png")
+plt.ylabel("Nbr d'animés")
+plt.savefig("Nbr_animés_par_annee.png")
 plt.close()
 
 # 3. Distribution des sources des animes
