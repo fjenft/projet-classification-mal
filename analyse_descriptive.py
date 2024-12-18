@@ -20,7 +20,7 @@ plt.figure(figsize=(10, 6))
 sns.histplot(anime_data_for_score['mean'], bins=30, kde=True, color='blue')
 plt.title("Distribution des scores moyens des animes")
 plt.xlabel("Score moyen")
-plt.ylabel("Fréquence")
+plt.ylabel("Nbr d'animes")
 plt.savefig("distribution_scores.png")
 plt.close()
 
