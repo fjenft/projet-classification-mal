@@ -5,7 +5,7 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.preprocessing import StandardScaler
 
 # Function to categorize popularity
@@ -69,6 +69,16 @@ print(f"Accuracy: {accuracy}")
 print("Classification Report:")
 print(report)
 
+# Visualize Confusion Matrix
+conf_matrix = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(8, 6))
+sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=['impopulaire', 'peu populaire', 'Moyen', 'Populaire', 'Très populaire'], yticklabels=['impopulaire', 'peu populaire', 'Moyen', 'Populaire', 'Très populaire'])
+plt.xlabel('predicted class')
+plt.ylabel('actual class')
+plt.title('Confusion Matrix')
+plt.savefig('confusion_matrix_defaultlambda.png', dpi=300, bbox_inches='tight')
+plt.show()
+
 
 #Now we execute the same code but this time we test different values of the hyperprarameter lambda and select the best one
 
@@ -113,11 +123,11 @@ pipeline = Pipeline(steps=[
 
 # on utilise une distribution log pour balayer un plus grand champs de valeur
 param_grid = {
-    'classifier__C': np.logspace(-4, 4, 20)
+    'classifier__C': np.logspace(-4, 4, 10)
 }
 
 # here we set up cv=5 and accuracy as the criteria for the selection
-grid_search = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', verbose=1)
+grid_search = GridSearchCV(pipeline, param_grid, cv=4, scoring='accuracy', verbose=1)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
@@ -138,3 +148,14 @@ print(f"Best C: {grid_search.best_params_['classifier__C']}")
 print(f"Best model accuracy: {accuracy}")
 print("Classification Report:")
 print(report)
+
+
+# Visualize Confusion Matrix
+conf_matrix = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(8, 6))
+sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=['impopulaire', 'peu populaire', 'Moyen', 'Populaire', 'Très populaire'], yticklabels=['impopulaire', 'peu populaire', 'Moyen', 'Populaire', 'Très populaire'])
+plt.xlabel('predicted class')
+plt.ylabel('actual class')
+plt.title('Confusion Matrix')
+plt.savefig('confusion_matrix_grid_search.png', dpi=300, bbox_inches='tight')
+plt.show()
