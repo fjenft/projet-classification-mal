@@ -32,8 +32,9 @@ plt.savefig('/home/onyxia/work/heatmap.png')
 
 # Popularity as a function of mean ratings
 plt.figure(figsize=(10, 6))
-sns.scatterplot(x=df['mean'], y=df['popularity'])
-plt.title('Popularity vs. Mean Ratings')
+plt.hexbin(x=df['mean'], y=df['popularity'], gridsize=50, cmap='Blues', mincnt=1)
+plt.colorbar(label='Count')
+plt.title('Popularity as a function of Mean Ratings')
 plt.xlabel('Mean Ratings')
 plt.ylabel('Popularity Rank')
 plt.show()
