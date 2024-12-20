@@ -39,15 +39,16 @@ plt.ylabel('Popularity Rank')
 plt.show()
 plt.savefig('/home/onyxia/work/Popularity&mean_scores.png')
 
-# Popularity as a function of number of episodes
+# Popularity as a function of number of users
 plt.figure(figsize=(10, 6))
-sns.boxplot(x=df['num_episodes'], y=df['popularity'])
-plt.title('Popularity vs. Number of Episodes')
-plt.xlabel('Number of Episodes')
+plt.scatter(df['num_list_users'], df['popularity'], alpha=0.6, s=10)
+plt.xlim(0, df['num_list_users'].max())
+plt.title('Popularity as a function of number of users')
+plt.xlabel('num_list_users')
 plt.ylabel('Popularity Rank')
-plt.yscale('log')  # Log scale to better visualize bigger values
+plt.yscale('log')
 plt.show()
-plt.savefig('/home/onyxia/work/Popularity&numbr_episodes.png')
+plt.savefig('/home/onyxia/work/Popularity&numbr_users.png')
 
 # Popularity as a function of media type
 plt.figure(figsize=(12, 6))
