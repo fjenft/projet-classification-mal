@@ -8,7 +8,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.preprocessing import StandardScaler
 
-# Function to categorize popularity
+# Fonction pour classifier la popularité
 def categorize_popularity(popularity):
     if popularity < 50:
         return 3  # Très populaire
@@ -20,23 +20,17 @@ def categorize_popularity(popularity):
         return 0  # Nul
     return -1  # Si aucune catégorie ne correspond (valeurs > 1000 ou autres cas)
 
-# Load data
+# préparer notre dataframe
 df = pd.read_csv('anime_data.csv')
 
-# creation of the new target variable
+# création de la nouvelle target cible
 df['popularity_category'] = df['popularity'].apply(categorize_popularity)
 
-# Selecting features and new target variable
+# Sélection des variables explicatives et de la nouvelle variable cible
 X = df[['num_episodes', 'num_scoring_users', 'source', 'status', 'nsfw', 'rating', 'media_type', 'average_episode_duration', 'start_year']]
 y = df['popularity_category']
 
-# we change missing values if they exist with eiter the average or the median
-for column in X.select_dtypes(include=['float64', 'int64']).columns:
-    X[column].fillna(X[column].median(), inplace=True)
-for column in X.select_dtypes(include=['object']).columns:
-    X[column].fillna(X[column].mode()[0], inplace=True)
-
-# changing categorical variables to numerical ones
+# convertir les variables catégoriques en des variables numériques
 categorical_features = ['source', 'status', 'nsfw', 'rating', 'media_type']
 numeric_features = ['num_episodes', 'num_scoring_users', 'average_episode_duration', 'start_year']
 
@@ -52,7 +46,7 @@ model = Pipeline(steps=[
     ('classifier', LogisticRegression(penalty='l1', solver='saga', max_iter=10000))
 ])
 
-# Split data into training and testing sets
+# diviser le jeux de données en une partie test et une partie d'entrainement
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
 # Fit 
@@ -80,7 +74,8 @@ plt.savefig('confusion_matrix_defaultlambda.png', dpi=300, bbox_inches='tight')
 plt.show()
 
 
-#Now we execute the same code but this time we test different values of the hyperprarameter lambda and select the best one
+
+#Maintenant on exécute le même code mais cette fois on teste différentes valeurs de l'hyperparamètre lambda afin de trouver celui qui donne les meilleurs résultats
 
 from sklearn.model_selection import GridSearchCV
 
@@ -126,7 +121,7 @@ param_grid = {
     'classifier__C': np.logspace(-4, 4, 10)
 }
 
-# here we set up cv=5 and accuracy as the criteria for the selection
+# on fixe cv=5 et l'accuracy comme critère de selection
 grid_search = GridSearchCV(pipeline, param_grid, cv=4, scoring='accuracy', verbose=1)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
