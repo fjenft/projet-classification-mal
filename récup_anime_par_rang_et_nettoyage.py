@@ -7,7 +7,7 @@ import ast
 all_anime = [] 
 nbr_needed = 27490  #Total number of anime on MAL as of 13/11/2024 (obtained by looking directly on the site of myanimelist)
 
-ID = {'X-MAL-CLIENT-ID': 'c2db532c391bf31339ffd6afa650d528'}
+ID = {'X-MAL-CLIENT-ID': 'c2db532c391bf31339ffd6afa650d528'} #id client obtenu après s'être inscrit sur My Anime List et avoir fait une demande
 url = 'https://api.myanimelist.net/v2/anime/ranking'
 parameters = {
     'ranking_type': 'all',  
