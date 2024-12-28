@@ -49,10 +49,10 @@ model = Pipeline(steps=[
 # diviser le jeux de données en une partie test et une partie d'entrainement
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
-# Fit 
+# Fitting
 model.fit(X_train, y_train)
 
-# Predict 
+# Prediction
 y_pred = model.predict(X_test)
 
 # Evaluation
@@ -63,7 +63,7 @@ print(f"Accuracy: {accuracy}")
 print("Classification Report:")
 print(report)
 
-# Visualize Confusion Matrix
+# Visualiser la matrice de confusion
 conf_matrix = confusion_matrix(y_test, y_pred)
 plt.figure(figsize=(8, 6))
 sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=['impopulaire', 'peu populaire', 'Moyen', 'Populaire', 'Très populaire'], yticklabels=['impopulaire', 'peu populaire', 'Moyen', 'Populaire', 'Très populaire'])
@@ -126,13 +126,13 @@ grid_search = GridSearchCV(pipeline, param_grid, cv=4, scoring='accuracy', verbo
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
-# we run the different models
+# On exécute les différents modèles
 grid_search.fit(X_train, y_train)
 
-# Best model
+# Récupération du meilleur modèle
 best_model = grid_search.best_estimator_
 
-# Predict on the test set
+# Prédiction
 y_pred = best_model.predict(X_test)
 
 # Evaluation
@@ -145,7 +145,7 @@ print("Classification Report:")
 print(report)
 
 
-# Visualize Confusion Matrix
+# visualisation de la matrice de confusion
 conf_matrix = confusion_matrix(y_test, y_pred)
 plt.figure(figsize=(8, 6))
 sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=['impopulaire', 'peu populaire', 'Moyen', 'Populaire', 'Très populaire'], yticklabels=['impopulaire', 'peu populaire', 'Moyen', 'Populaire', 'Très populaire'])
