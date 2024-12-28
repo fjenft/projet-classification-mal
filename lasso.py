@@ -80,18 +80,6 @@ plt.show()
 from sklearn.model_selection import GridSearchCV
 
 
-def categorize_popularity(popularity):
-    if popularity < 50:
-        return 3  # Très populaire
-    elif 50 <= popularity < 200:
-        return 2  # Populaire
-    elif 200 <= popularity < 500:
-        return 1  # Moyen
-    elif 500 <= popularity < 1000:
-        return 0  # Nul
-    return -1  # Si aucune catégorie ne correspond (valeurs > 1000 ou autres cas)
-
-
 df = pd.read_csv('anime_data.csv')
 df['popularity_category'] = df['popularity'].apply(categorize_popularity)
 X = df[['num_episodes', 'num_scoring_users', 'source', 'status', 'nsfw', 'rating', 'media_type', 'average_episode_duration', 'start_year']]
