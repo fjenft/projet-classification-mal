@@ -34,7 +34,13 @@ Cette partie servira à étudier les données, leur structures, et tester quelqu
 
 - Cependant, pour plus de visibilité nous allons créer différentes classes en fonction des valeurs de la variables **popularity** : {"nul", "moyen", "Très populaire", "populaire"},  L'intérêt de la classification devient immédiat : pour chaque nouvelles observations, être en mesure d'attribuer un ordre de grandeurs de popularité. A l'aide de la matrice de corrélation, nous pouvons d'ores et déjà exclure les variables très corrélées avec la variable dépendante comme 'ranking' par exemple.
 
-- Nous proposons d'utiliser deux modèles de classification multi-classes : régression logistique (multinomiale) et une méthode de boosting (Extreme Gradient Boosted ou XGBoost). Le code est entièrement détaillé dans le notebook.
+- Nous proposons d'utiliser deux modèles de classification multi-classes :
+     1. **Régression logistique (multinomiale)**  
+   Nous commençons par une régression logistique (multinomiale) de base, puis nous proposons un modèle LASSO plus complexe avec un hyperparamètre fixé.  
+   Enfin, nous examinons l’effet de différentes valeurs de cet hyperparamètre afin de sélectionner le meilleur modèle.
+
+     2. **Méthode de boosting (XGBoost)**  
+   Nous utilisons ici une méthode de boosting (Extreme Gradient Boosted ou XGBoost). Le code est entièrement détaillé dans le notebook.
 
 - Enfin, nous allons mesurer les performances de chacune des deux classifications puis les comparerons en se basant sur la matrice de confusion et l'AUC.
 
