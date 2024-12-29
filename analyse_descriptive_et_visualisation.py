@@ -12,13 +12,7 @@ print(anime_data.head())
 print(anime_data.describe())
 print(anime_data.dtypes)
 
-
-
-#II/Etude approfondie des données:
-#On cherche ici à tester et visualiser quelques intuitions qu'on pourrait avoir vis-à-vis des données
-
-#Dans un premier temps, on regarde la matrice de corrélation
-
+#On regarde la matrice de corrélation
 numerical_features = ['num_list_users', 'num_episodes', 'mean', 'rank', 'popularity', 'num_scoring_users', 'start_year']
 plt.figure(figsize=(12, 8))
 correlation_matrix = df[numerical_features].corr()
@@ -26,6 +20,9 @@ sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f')
 plt.title('Matrice de correlation')
 plt.show()
 plt.savefig('matrice_de_co.png')
+
+#II/Etude approfondie des données:
+#On cherche ici à tester et visualiser quelques intuitions qu'on pourrait avoir vis-à-vis des données
 
 #On va utiliser la caractéristique note moyenne des utilisateurs pour un animé dans nos études
 #Or, comme une note moyenne des utilisateurs pour un anime donné était mise à 0 quand elle était inconnue (NaN), on va supprimer les animes dont la note moyenne est 0.

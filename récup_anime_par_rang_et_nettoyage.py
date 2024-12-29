@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 import ast
 
-#comme l'API ne nous permet pas de récupérer les animes en groupe à travers leur ID, on récupère la liste des animés et leur caractéristiques à partir de leur le rang, dans l'ordre décroissant décroissant (en prenant les 100 1ers rangs, puis les 100 rangs suivants ainsi de suite...)
+#Comme l'API ne nous permet pas de récupérer les animes en groupe à travers leur ID, on récupère la liste des animés et leur caractéristiques à partir de leur le rang, dans l'ordre décroissant décroissant (en prenant les 100 1ers rangs, puis les 100 rangs suivants ainsi de suite...)
 
 all_anime = [] 
 nbr_needed = 27490  #Total number of anime on MAL as of 13/11/2024 (obtained by looking directly on the site of myanimelist)
