@@ -7,12 +7,12 @@ Pour récupérer les données qui vont nous servir au cours de ce projet, il fau
 
 ## Analyse des données
 ## Modélisation et prédiction à l'aide des classifieurs
-### Motivations 
+* Motivations 
 #### Dans cette partie, nous souhaite **prédire** si un *anime* sera ou non populaire en nous basant sur les données disponibles. A chaque utilisateur, on associe une réalisation du vecteur de variables aléatoires associées à chaque caractéristique mesurée (score donné par les utilisateurs, nombres de vues ...).
 
-#### La variable **popularity** renseigne sur le rang de popularité d'une oeuvre basé sur le nombre total de membres l'ayant ajouté. Par exemple, un *anime* de popularité 1 signifie que l'oeuvre a été rajoutée par le plus grand nombre d'utilisateurs. C'est nombre variable dépendante.
+* La variable **popularity** renseigne sur le rang de popularité d'une oeuvre basé sur le nombre total de membres l'ayant ajouté. Par exemple, un *anime* de popularité 1 signifie que l'oeuvre a été rajoutée par le plus grand nombre d'utilisateurs. C'est nombre variable dépendante.
 
-#### Cependant, pour plus de visibilité nous allons créer différentes classes en fonction des valeurs de la variables **popularity** : {"nul", "moyen", "Très populaire", "populaire"},  L'intérêt de la classification devient immédiat : pour chaque nouvelles observations, être en mesure d'attribuer un ordre de grandeurs de popularité.
+* Cependant, pour plus de visibilité nous allons créer différentes classes en fonction des valeurs de la variables **popularity** : {"nul", "moyen", "Très populaire", "populaire"},  L'intérêt de la classification devient immédiat : pour chaque nouvelles observations, être en mesure d'attribuer un ordre de grandeurs de popularité.
 
 
 
