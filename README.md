@@ -1,5 +1,7 @@
 # Analyse, modélisation et classification d'une base de données : MyAnimeList
 
+# ATTENTION/WARNING : Il est important de noter que certaines cellules du notebook peuvent mettre du temps à s'executer ( plusieurs minutes, voire parfois plusieurs dizaines de minutes)
+
 ## Guide d'utilisation du code
 
 Pour récupérer les données qui vont nous servir au cours de ce projet, il faut avant tout lancer la première partie du notebook (ou le fichier recup_anime_par_rang_et_nettoyage) qui va à la fois récupérer un dataframe qui liste les animés et leur caractéristiques ainsi que faire une partie du nettoyage sur ces données (traiter les valeurs NaN, supprimer les colonnes inutiles, etc...). Le dataframe sera enregistré localement au format csv. La récupération du dataframe peut prendre un peu de temps.
