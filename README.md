@@ -7,9 +7,13 @@
 Pour récupérer les données qui vont nous servir au cours de ce projet, il faut avant tout lancer la première partie du notebook (ou le fichier recup_anime_par_rang_et_nettoyage) qui va à la fois récupérer un dataframe qui liste les animés et leur caractéristiques ainsi que faire une partie du nettoyage sur ces données (traiter les valeurs NaN, supprimer les colonnes inutiles, etc...). Le dataframe sera enregistré localement au format csv. La récupération du dataframe peut prendre un peu de temps.
 
 Après avoir récupérer les données, vous pouvez :
+
 -lancer la seconde partie du notebook (ou le fichier python analyse_descriptive). Cela vous fournira une analyse des données obtenues en première étape
+
 -lancer la troisième partie, première sous-section du notebook. Cela vous fournira une classification des animés en fonction de leur popularité avec une méthode par régression linéaire
+
 -lancer la troisième partie, deuxième sous-section du notebook, qui vous fera une classification à l'aide d'une regression lasso
+
 -lancer la troisième partie, troisième sous-section du notebook, qui fera de même que classification à l'aide de XGboost
 
 ## Justification des différentes parties
