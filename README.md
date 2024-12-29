@@ -22,6 +22,6 @@ Pour récupérer les données qui vont nous servir au cours de ce projet, il fau
 
 Après avoir récupérer les données, vous pouvez :
 -lancer la seconde partie du notebook (ou le fichier python analyse_descriptive). Cela vous fournira une analyse des données obtenues en première étape
--lancer la troisième partie, première sous-section du notebook (ou le fichier classification_par_reg_log). Cela vous fournira une classification des animés en fonction de leur popularité avec une méthode par régression linéaire
--lancer la troisème partie, deuxième sous-section du notebook (ou le fichier lasso), qui vous fera une classification à l'aide d'une regression lasso
--lancer la troisième partie, troisième sous-section du notebook (ou le fichier classification_par_XGB), qui fera de même que classification à l'aide de XGboost
+-lancer la troisième partie, première sous-section du notebook. Cela vous fournira une classification des animés en fonction de leur popularité avec une méthode par régression linéaire
+-lancer la troisième partie, deuxième sous-section du notebook, qui vous fera une classification à l'aide d'une regression lasso
+-lancer la troisième partie, troisième sous-section du notebook, qui fera de même que classification à l'aide de XGboost
