@@ -172,7 +172,7 @@ plt.yscale('log') #échelle logarithmique
 plt.show()
 plt.savefig('Popularité&nbr_users.png')
 
-# Popularité en fonction du type de média
+#3/Popularité en fonction du type de média
 plt.figure(figsize=(12, 6))
 sns.boxplot(x=df['media_type'], y=df['popularity'], order=df['media_type'].value_counts().index)
 plt.title('Popularité en fonction du type de media')
